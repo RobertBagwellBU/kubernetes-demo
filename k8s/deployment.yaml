@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: kubernetes-demo-api
-          image: jsmasterypro/kubernetes-demo-api:latest
+          image: robertbagwell0614/kubernetes-demo-api:latest
           ports:
             - containerPort: 3000
           env:

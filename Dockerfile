@@ -1,14 +1,16 @@
+# Use a small base image
 FROM node:18-alpine AS base
 WORKDIR /app
 
-# Install deps separately to leverage Docker cache
+# Install deps separately for caching
 COPY package.json package-lock.json* ./
 RUN npm ci --omit=dev
 
-# Copy app files
+# Copy app source
 COPY . .
 
-# Run as non-root user for better security (alpine node image has a user 'node' with uid 1000)
+# Run as non-root (alpine node image includes user 'node')
 USER node
 EXPOSE 3000
+ENV NODE_ENV=production
 CMD ["npm", "start"]
